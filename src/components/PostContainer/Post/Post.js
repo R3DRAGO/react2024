@@ -1,9 +1,9 @@
 const Post = ({post, getCurrentPost}) => {
-    const {id, title} = post;
+    const {userId, title} = post;
 
     return (
         <div>>
-            <div>id: {id}</div>
+            <div>userId: {userId}</div>
             <div>title: {title}</div>
             <button onClick={()=>getCurrentPost(post)}>More details for post</button>
         </div>
