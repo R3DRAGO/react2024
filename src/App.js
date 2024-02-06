@@ -1,7 +1,9 @@
+import {Sheeps} from "./Sheeps/Sheeps";
+
 const App = () => {
     return (
         <div>
-            App
+            <Sheeps/>
         </div>
     );
 };
