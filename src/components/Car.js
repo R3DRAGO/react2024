@@ -1,6 +1,11 @@
-const Car = ({car, setCarForUpdate}) => {
-    const {id, brand, price, year} = car;
+import {carService} from "../services/carService";
 
+const Car = ({car, setCarForUpdate, setTrigger}) => {
+    const {id, brand, price, year} = car;
+    const deleteCar = async () =>{
+        await carService.deleteById(id)
+        setTrigger(prev=>!prev)
+    }
     return (
         <div>
             <div>id: {id}</div>
@@ -8,7 +13,7 @@ const Car = ({car, setCarForUpdate}) => {
             <div>price: {price}</div>
             <div>year: {year}</div>
             <button onClick={()=>setCarForUpdate(car)}>UPDATE</button>
-            <button>DELETE</button>
+            <button onClick={deleteCar}>DELETE</button>
         </div>
     );
 };

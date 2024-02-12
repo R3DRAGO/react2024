@@ -23,12 +23,15 @@ const CarForm = ({setTrigger, carForUpdate, setCarForUpdate}) => {
 
     }
 
-    const update = (car) => {
-        carService.updateById()
+    const update = async (car) => {
+        await carService.updateById(carForUpdate.id, car)
+        setTrigger(prev=>!prev)
+        setCarForUpdate(null)
+        reset()
     }
 
     return (
-        <form onSubmit={handleSubmit(save)}>
+        <form onSubmit={handleSubmit(carForUpdate?update:save)}>
             <input type="text" placeholder={'brand'} {...register('brand', {
                 pattern:{
                     value:/^[a-zA-Zа-яА-яёЁіІїЇ]{1,20}$/,
@@ -57,7 +60,7 @@ const CarForm = ({setTrigger, carForUpdate, setCarForUpdate}) => {
                     message: 'max current year'
                 }
             })}/>
-            <button disabled={!isValid}>SAVE</button>
+            <button disabled={!isValid}>{carForUpdate?'UPDATE':'SAVE'}</button>
             {errors.brand&&<div>{errors.brand.message}</div>}
             {errors.price&&<div>{errors.price.message}</div>}
             {errors.year&&<div>{errors.year.message}</div>}
