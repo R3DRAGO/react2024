@@ -2,7 +2,6 @@ import {useDispatch, useSelector} from "react-redux";
 import {useEffect} from "react";
 
 import {Car} from "./Car";
-import {carService} from "../../services";
 import {carActions} from "../../store";
 
 const Cars = () => {
@@ -11,7 +10,8 @@ const Cars = () => {
 
 
     useEffect(() => {
-        carService.getAll().then(({data}) => dispatch(carActions.setAllCars(data)))
+        // carService.getAll().then(({data}) => dispatch(carActions.setAllCars(data)))
+        dispatch(carActions.getAll())
     }, [trigger, dispatch])
 
     return (
